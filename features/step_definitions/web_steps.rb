@@ -55,6 +55,11 @@ And /^I am logged into the admin panel$/ do
   end
 end
 
+And /^two articles are present$/ do
+    Article.create!({title: 'Foo', body: 'Foo'})
+    Article.create!({title: 'Bar', body: 'Bar'})
+end
+
 # Single-line step scoper
 When /^(.*) within (.*[^:])$/ do |step, parent|
   with_scope(parent) { When step }
@@ -274,5 +279,6 @@ Then /^(?:|I )should have the following query string:$/ do |expected_pairs|
 end
 
 Then /^show me the page$/ do
-  save_and_open_page
+    puts page.body
+  #save_and_open_page
 end
