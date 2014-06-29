@@ -4,11 +4,10 @@
 
 <h3>Merge articles</h3>
 
-<%= form_tag(controller: "admin/content", action: "edit", method: "get") do %>
+<%= form_tag(controller: 'admin/content', action: 'merge', id: @article.id) do %>
 	<p>Article ID
 	<%= text_field_tag(:merge_with) %><br />
 	<%= submit_tag('Merge') %>
 	</p>
 <% end %>
-
 

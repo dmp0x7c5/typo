@@ -289,6 +289,19 @@ class Article < Content
     end
   end
 
+  # returns article object
+  def merge_with(other_article_id)
+    other_article = Article.find(other_article_id)
+    if other_article.is_a?(Article) == false and other_article_id == id and user.admin? == false
+	    return nil
+    end
+    new_article = Article.get_or_build_article
+    new_article.title = title + ' ' + other_article.title 
+    new_article.body = body + ' ' + other_article.body
+    new_article.user = user
+    new_article
+  end
+
   # Finds one article which was posted on a certain date and matches the supplied dashed-title
   # params is a Hash
   def self.find_by_permalink(params)

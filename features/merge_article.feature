@@ -9,9 +9,9 @@ Feature: Merge Articles
 
   Scenario: Successfully write articles
     Given I am on articles admin page
-    Then show me the page
+#    Then show me the page
     When I follow "Edit"
-    And I fill in "merge_with" with "2"
+    And I fill in "merge_with" with "3"
     And I press "Merge"
-    Then I should be on the articles admin page
-    And I should see "Foo"
+    Then I should be on articles admin page
+    And I should see "Hello World! Foo"
