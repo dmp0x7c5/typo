@@ -23,7 +23,8 @@ class Article < Content
   has_many :categories, :through => :categorizations
   has_many :triggers, :as => :pending_item
 
-  has_many :comments,   :dependent => :destroy, :order => "created_at ASC" do
+#  has_many :comments,   :dependent => :destroy, :order => "created_at ASC" do
+  has_many :comments, :order => "created_at ASC" do
 
     # Get only ham or presumed_ham comments
     def ham
@@ -299,7 +300,16 @@ class Article < Content
     new_article.title = title + ' ' + other_article.title 
     new_article.body = body + ' ' + other_article.body
     new_article.user = user
+    new_article.allow_comments = true
+    copy_comments(self, new_article)
+    copy_comments(other_article, new_article)
     new_article
+  end
+
+  def copy_comments(article_from, article_to)
+    article_from.comments.each do |comm|
+      article_to.comments << comm.clone
+    end
   end
 
   # Finds one article which was posted on a certain date and matches the supplied dashed-title

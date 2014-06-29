@@ -38,14 +38,18 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def merge
-    @article = Article.find(params[:id])
-    art = @article.merge_with(params[:merge_with])
+    article = Article.find(params[:id])
+    art = article.merge_with(params[:merge_with])
     unless art.is_a? Article
       flash[:error] = 'Unable to merge article'
     else
       art.save!
-      @article.destroy
-      Article.find(params[:merge_with]).destroy
+
+      article.destroy
+
+      @article_merged = Article.find(params[:merge_with])
+      @article_merged.destroy
+
       flash[:notice] = 'Article merged'
     end
     redirect_to admin_content_path
