@@ -44,6 +44,8 @@ class Admin::ContentController < Admin::BaseController
       flash[:error] = 'Unable to merge article'
     else
       art.save!
+      @article.destroy
+      Article.find(params[:merge_with]).destroy
       flash[:notice] = 'Article merged'
     end
     redirect_to admin_content_path
