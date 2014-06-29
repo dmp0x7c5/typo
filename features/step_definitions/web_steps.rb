@@ -56,8 +56,9 @@ And /^I am logged into the admin panel$/ do
 end
 
 And /^two articles are present$/ do
-    Article.create!({title: 'Foo', body: 'Foo'})
-    Article.create!({title: 'Bar', body: 'Bar'})
+  Article.create(:allow_comments => true, :allow_pings => true, :author => "Mr Typo", :body => "FooBody", :guid => "2bf3e2ca-ed7b-4562-8a4a-8ce8438822c8", :id => 3, :permalink => "foo", :post_type => "read", :published => true, :published_at => "2012-06-09 21:51:55 UTC", :settings => {"password"=>""}, :state => "published", :text_filter_id => 5, :title => "Foo", :type => "Article", :user_id => 1)
+  Article.create(:allow_comments => true, :allow_pings => true, :author => "Mr Typo", :body => "BarBody", :guid => "3bf3e2ca-ed7b-4562-8a4a-8ce8438822c8", :id => 4, :permalink => "bar", :post_type => "read", :published => true, :published_at => "2012-06-09 21:51:55 UTC", :settings => {"password"=>""}, :state => "published", :text_filter_id => 5, :title => "Bar", :type => "Article", :user_id => 1)
+  puts Article.all
 end
 
 # Single-line step scoper
